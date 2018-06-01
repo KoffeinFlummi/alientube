@@ -67,9 +67,9 @@ module AlienTube {
                             this.referenceParent.children.push(comment);
                             getParentNode.appendChild(comment.representedHTMLElement);
                         }
-                    });
+                    }.bind(this));
                 }
-            });
+            }.bind(this));
         }
     }
 }
