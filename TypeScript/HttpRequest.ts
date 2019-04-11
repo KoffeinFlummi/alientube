@@ -15,7 +15,7 @@ module AlienTube {
     export class HttpRequest {
         private static acceptableResponseTypes = [200, 201, 202, 301, 302, 303, 0];
 
-        constructor(url: string, type: RequestType, callback: any, postData?: any, errorHandler?: any) {
+        constructor(url: string, type: RequestType, callback: any, postData?: any, errorHandler?: any, useCredentials: boolean = true) {
              if (Utilities.getCurrentBrowser() === Browser.SAFARI && safari.self.addEventListener) {
                 /* Generate a unique identifier to identify our request and response through Safari's message system. */
                 let uuid = HttpRequest.generateUUID();
@@ -42,7 +42,7 @@ module AlienTube {
             } else {
                 let xhr = new XMLHttpRequest();
                 xhr.open(RequestType[type], url, true);
-                xhr.withCredentials = true;
+                xhr.withCredentials = useCredentials;
                 if (type === RequestType.POST) {
                     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 }

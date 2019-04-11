@@ -21,17 +21,19 @@ module AlienTube.Reddit {
         private postData: any;
         private loadingScreen: LoadingScreen;
         private attempts: number;
+        private useCredentials: boolean;
 
         private loadTimer = 0;
         private timeoutTimer = 0;
 
-        constructor(url: string, type: RequestType, callback: any, postData?: any, loadingScreen?: LoadingScreen) {
+        constructor(url: string, type: RequestType, callback: any, postData?: any, loadingScreen?: LoadingScreen, useCredentials?: boolean) {
             /* Move the request parameters so they are accessible from anywhere within the class. */
             this.requestUrl = url;
             this.requestType = type;
             this.finalCallback = callback;
             this.postData = postData;
             this.loadingScreen = loadingScreen;
+            this.useCredentials = useCredentials === undefined ? true : useCredentials;
             
             /* Perform the request. */
             this.performRequest();
@@ -57,7 +59,7 @@ module AlienTube.Reddit {
             }, 30000);
 
             /* Perform the reddit api request */
-            new HttpRequest(this.requestUrl, this.requestType, this.onSuccess.bind(this), this.postData, this.onRequestError.bind(this));
+            new HttpRequest(this.requestUrl, this.requestType, this.onSuccess.bind(this), this.postData, this.onRequestError.bind(this), this.useCredentials);
         }
     	
         /**

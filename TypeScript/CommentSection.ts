@@ -129,7 +129,7 @@ module AlienTube {
                             }
                             this.returnNoResults();
                         }
-                    }.bind(this), null, loadingScreen);
+                    }.bind(this), null, loadingScreen, false);
                 }.bind(this));
             }
         }
@@ -169,7 +169,7 @@ module AlienTube {
 
                 new CommentThread(responseObject, this);
                 this.storedTabCollection.push(responseObject);
-            }.bind(this), null, loadingScreen);
+            }.bind(this), null, loadingScreen, false);
         }
 
         /**
