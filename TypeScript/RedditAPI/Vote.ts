@@ -15,11 +15,11 @@ module AlienTube.Reddit {
     export class VoteRequest {
         constructor(thing: string, type: Vote, callback?: any) {
             let url = "https://api.reddit.com/api/vote";
-            new HttpRequest(url, RequestType.POST, callback, {
+            chrome.runtime.sendMessage({requestType: "redditRequest", url: url, type: RequestType.POST, data: {
                 "uh": Preferences.getString("redditUserIdentifierHash"),
                 "id": thing,
                 "dir": type
-            });
+            }}, (response) => {});
         }
     }
 

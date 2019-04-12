@@ -22,6 +22,14 @@
       "run_at": "document_start"
     }
   ],
+
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+
   "permissions": [
     "http://www.youtube.com/",
     "https://www.youtube.com/",

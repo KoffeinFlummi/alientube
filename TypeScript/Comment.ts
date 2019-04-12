@@ -331,16 +331,18 @@ module AlienTube {
             let confirmation = window.confirm(Application.localisationManager.get("post_delete_confirm"));
             if (confirmation) {
                 var url = "https://api.reddit.com/api/del";
-                new HttpRequest(url, RequestType.POST, function () {
-                    this.representedHTMLElement.parentNode.removeChild(this.representedHTMLElement);
-                    let getIndexInParentList = this.commentThread.children.indexOf(this);
-                    if (getIndexInParentList !== -1) {
-                        this.commentThread.children.splice(getIndexInParentList, 1);
+                chrome.runtime.sendMessage({requestType: "redditRequest", url: url, type: RequestType.POST, data: {
+                    "uh": Preferences.getString("redditUserIdentifierHash"),
+                    "id": this.commentObject.name,
+                }}, (response) => {
+                    if (response.success) {
+                        this.representedHTMLElement.parentNode.removeChild(this.representedHTMLElement);
+                        let getIndexInParentList = this.commentThread.children.indexOf(this);
+                        if (getIndexInParentList !== -1) {
+                            this.commentThread.children.splice(getIndexInParentList, 1);
+                        }
                     }
-                }, {
-                        "uh": Preferences.getString("redditUserIdentifierHash"),
-                        "id": this.commentObject.name,
-                    });
+                });
             }
         }
     }

@@ -57,7 +57,13 @@ module AlienTube.Reddit {
             }, 30000);
 
             /* Perform the reddit api request */
-            new HttpRequest(this.requestUrl, this.requestType, this.onSuccess.bind(this), this.postData, this.onRequestError.bind(this));
+            chrome.runtime.sendMessage({requestType: "redditRequest", url: this.requestUrl, type: this.requestType, data: this.postData}, (response) => {
+                if (response.success) {
+                    this.onSuccess(response.content);
+                } else {
+                    this.onRequestError(response.status, response.content);
+                }
+            });
         }
     	
         /**

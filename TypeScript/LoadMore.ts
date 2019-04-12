@@ -46,28 +46,29 @@ module AlienTube {
             loadingText.classList.add("loading");
             loadingText.textContent = Application.localisationManager.get("loading_generic_message");
 
-            let generateRequestUrl = `https://api.reddit.com/r/${this.commentThread.threadInformation.subreddit}/comments/${this.commentThread.threadInformation.id}/z/${this.data.id}.json`;
+            let url = `https://api.reddit.com/r/${this.commentThread.threadInformation.subreddit}/comments/${this.commentThread.threadInformation.id}/z/${this.data.id}.json`;
+            chrome.runtime.sendMessage({requestType: "redditRequest", url: url, type: RequestType.GET}, (response) => {
+                if (response.success) {
+                    /* Remove "loading comments" text */
+                    let getParentNode = loadingText.parentNode.parentNode;
+                    getParentNode.removeChild(loadingText.parentNode);
 
-            new HttpRequest(generateRequestUrl, RequestType.GET, function (responseData) {
-                /* Remove "loading comments" text */
-                let getParentNode = loadingText.parentNode.parentNode;
-                getParentNode.removeChild(loadingText.parentNode);
-
-                /* Traverse the retrieved comments and append them to the comment section */
-                let commentItems = JSON.parse(responseData)[1].data.children;
-                if (commentItems.length > 0) {
-                    commentItems.forEach(function (commentObject) {
-                        var readmore, comment;
-                        if (commentObject.kind === "more") {
-                            readmore = new LoadMore(commentObject.data, this.referenceParent, this.commentThread);
-                            this.referenceParent.children.push(readmore);
-                            getParentNode.appendChild(readmore.representedHTMLElement);
-                        } else {
-                            comment = new Comment(commentObject.data, this.commentThread);
-                            this.referenceParent.children.push(comment);
-                            getParentNode.appendChild(comment.representedHTMLElement);
-                        }
-                    });
+                    /* Traverse the retrieved comments and append them to the comment section */
+                    let commentItems = JSON.parse(response.content)[1].data.children;
+                    if (commentItems.length > 0) {
+                        commentItems.forEach((commentObject) => {
+                            var readmore, comment;
+                            if (commentObject.kind === "more") {
+                                readmore = new LoadMore(commentObject.data, this.referenceParent, this.commentThread);
+                                this.referenceParent.children.push(readmore);
+                                getParentNode.appendChild(readmore.representedHTMLElement);
+                            } else {
+                                comment = new Comment(commentObject.data, this.commentThread);
+                                this.referenceParent.children.push(comment);
+                                getParentNode.appendChild(comment.representedHTMLElement);
+                            }
+                        });
+                    }
                 }
             });
         }

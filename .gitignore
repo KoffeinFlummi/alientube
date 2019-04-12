@@ -19,15 +19,15 @@ Safari.safariextension/TypeScript/*
 
 TypeScript/*.js
 lib/script.js
+lib/script-es5.js
 lib/script.d.ts
 lib/options.js
+lib/options-es5.js
 lib/options.d.ts
+lib/background.js
+lib/background-es5.js
 
 res/style.css
 .sass-cache/*
 
 reloadExtension.scpt
-
-lib/options-es5.js
-
-lib/script-es5.js

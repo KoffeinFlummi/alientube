@@ -111,21 +111,29 @@ if [ "$1" == "--debug" ]; then
     tsc --target ES5 --out lib/options-es5.js TypeScript/Options/Options.ts --removeComments --sourcemap
     echo Compiling Application TypeScript in ES5 compatibility mode without comments with source map.
     tsc --target ES5 --out lib/script-es5.js TypeScript/index.ts --removeComments --sourcemap
-    
+    echo Compiling Background TypeScript in ES5 compatibility mode without comments with source map.
+    tsc --target ES5 --out lib/background-es5.js TypeScript/background.ts --removeComments --sourcemap
+
     echo Compiling Options page TypeScript file without comments with source map.
     tsc --target ES6 --out lib/options.js TypeScript/Options/Options.ts --removeComments --sourcemap
     echo Compiling Application TypeScript file without comments with source map.
     tsc --target ES6 --out lib/script.js TypeScript/index.ts --removeComments --sourcemap
+    echo Compiling Background TypeScript file without comments with source map.
+    tsc --target ES6 --out lib/background.js TypeScript/background.ts --removeComments --sourcemap
 else
     echo Compiling Options page TypeScript in ES5 compatibility mode with comments.
     tsc --target ES2015 --out lib/options-es5.js TypeScript/Options/Options.ts
     echo Compiling Application page TypeScript in ES5 compatibility mode with comments.
     tsc --target ES2015 --out lib/script-es5.js TypeScript/index.ts
-    
+    echo Compiling Background page TypeScript in ES5 compatibility mode with comments.
+    tsc --target ES2015 --out lib/background-es5.js TypeScript/background.ts
+
     echo Compiling Options page TypeScript file with comments.
     tsc --target ES6 --out lib/options.js TypeScript/Options/Options.ts
     echo Compiling Application page TypeScript file with comments.
     tsc --target ES6 --out lib/script.js TypeScript/index.ts
+    echo Compiling Background page TypeScript file with comments.
+    tsc --target ES6 --out lib/background.js TypeScript/background.ts
 fi
 echo
 echo Copying TypeScript Files
@@ -135,6 +143,7 @@ cp -vf lib/options-es5.js Safari.safariextension/res/options.js
 cp -vf lib/script-es5.js Chrome/js/script.js
 cp -vf lib/script-es5.js Safari.safariextension/js/script.js
 cp -vf lib/script-es5.js Firefox/data/script.js
+cp -vf lib/background-es5.js Chrome/js/background.js
 echo
 echo
 
@@ -159,11 +168,11 @@ if [ "$1" == "--debug" ]; then
     cp -vf lib/options-es5.js.map Safari.safariextension/js/options.js.map
     cp -vf lib/script.js.map Firefox/data/script.js.map
     cp -vf lib/options.js.map Firefox/data/options.js.map
-    echo 
+    echo ""
     cp -vf res/style.css.map Chrome/res/style.css.map
     cp -vf res/style.css.map Safari.safariextension/res/style.css.map
     cp -vf res/style.css.map Firefox/data/style.css.map
-    echo 
+    echo ""
     echo Copying TypeScript source folders.
     cp -fr TypeScript Chrome/
     cp -fr TypeScript Safari.safariextension/

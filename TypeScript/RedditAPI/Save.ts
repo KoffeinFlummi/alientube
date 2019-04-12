@@ -15,9 +15,13 @@ module AlienTube.Reddit {
     export class SaveRequest {
         constructor(thing: string, type: SaveType, callback: any) {
             let url = "https://api.reddit.com/api/" + SaveType[type].toLowerCase();
-            new HttpRequest(url, RequestType.POST, callback, {
+            chrome.runtime.sendMessage({requestType: "redditRequest", url: url, type: RequestType.POST, data: {
                 "uh": Preferences.getString("redditUserIdentifierHash"),
                 "id": thing
+            }}, (response) => {
+                if (response.success) {
+                    callback(response.content);
+                }
             });
         }
     }

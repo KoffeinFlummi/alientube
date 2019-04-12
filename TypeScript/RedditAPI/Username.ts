@@ -12,14 +12,16 @@ module AlienTube.Reddit {
     export class RetreiveUsernameRequest {
         constructor() {
             let url = "https://api.reddit.com/api/me.json";
-            new HttpRequest(url, RequestType.GET, function (responseText) {
-                let responseData = JSON.parse(responseText);
-                Preferences.set("username", responseData.data.name);
+            chrome.runtime.sendMessage({requestType: "redditRequest", url: url, type: RequestType.GET}, (response) => {
+                if (response.success) {
+                    let responseData = JSON.parse(response.content);
+                    Preferences.set("username", responseData.data.name);
 
-                /* If possible we should set the username retroactively so the user doesn't need to reload the page */
-                let usernameField = document.querySelector(".at_writingauthor");
-                if (usernameField) {
-                    usernameField.textContent = Application.localisationManager.get("commentfield_label_author", [Preferences.getString("username")]);
+                    /* If possible we should set the username retroactively so the user doesn't need to reload the page */
+                    let usernameField = document.querySelector(".at_writingauthor");
+                    if (usernameField) {
+                        usernameField.textContent = Application.localisationManager.get("commentfield_label_author", [Preferences.getString("username")]);
+                    }
                 }
             });
         }

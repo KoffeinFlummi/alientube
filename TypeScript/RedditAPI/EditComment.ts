@@ -15,11 +15,15 @@ module AlienTube.Reddit {
     export class EditCommentRequest {
         constructor(thing: string, comment: string, callback?: any) {
             let url = "https://api.reddit.com/api/editusertext";
-            new HttpRequest(url, RequestType.POST, callback, {
+            chrome.runtime.sendMessage({requestType: "redditRequest", url: url, type: RequestType.POST, data: {
                 "uh": Preferences.getString("redditUserIdentifierHash"),
                 "thing_id": thing,
                 "text": comment,
                 "api_type": "json"
+            }}, (response) => {
+                if (response.success) {
+                    callback(response.content);
+                }
             });
         }
     }
