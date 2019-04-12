@@ -134,9 +134,9 @@ module AlienTube {
             giveGoldToUser.textContent = Application.localisationManager.get("post_button_gold");
 
             /* Set the button text and the event handler for the "report post" button */
-            let reportToAdministrators = this.threadContainer.querySelector(".report");
-            reportToAdministrators.textContent = Application.localisationManager.get("post_button_report");
-            reportToAdministrators.addEventListener("click", this.onReportButtonClicked.bind(this), false);
+            //let reportToAdministrators = this.threadContainer.querySelector(".report");
+            //reportToAdministrators.textContent = Application.localisationManager.get("post_button_report");
+            //reportToAdministrators.addEventListener("click", this.onReportButtonClicked.bind(this), false);
 
             /* Set the button text and event handler for the sort selector. */
             let sortController = <HTMLSelectElement> this.threadContainer.querySelector(".sort");

@@ -132,12 +132,12 @@ module AlienTube {
             giveGoldToUser.setAttribute("href", "http://www.reddit.com/gold?goldtype=gift&months=1&thing=" + this.commentObject.name);
             giveGoldToUser.textContent = Application.localisationManager.get("post_button_gold");
 
-            let reportToAdministrators = this.representedHTMLElement.querySelector(".report");
+            //let reportToAdministrators = this.representedHTMLElement.querySelector(".report");
             let editPost = this.representedHTMLElement.querySelector(".at_edit");
             let deletePost = this.representedHTMLElement.querySelector(".at_delete");
             if (this.commentObject.author === Preferences.getString("username")) {
                 /* Report button does not make sense on our own post, so let's get rid of it */
-                reportToAdministrators.parentNode.removeChild(reportToAdministrators);
+                //reportToAdministrators.parentNode.removeChild(reportToAdministrators);
 
                 /* Set the button text and the event handler for the "edit post" button */
                 editPost.textContent = Application.localisationManager.get("post_button_edit");
@@ -152,8 +152,8 @@ module AlienTube {
                 deletePost.parentNode.removeChild(deletePost);
 
                 /* Set the button text and the event handler for the "report comment" button */
-                reportToAdministrators.textContent = Application.localisationManager.get("post_button_report");
-                reportToAdministrators.addEventListener("click", this.onReportButtonClicked.bind(this), false);
+                //reportToAdministrators.textContent = Application.localisationManager.get("post_button_report");
+                //reportToAdministrators.addEventListener("click", this.onReportButtonClicked.bind(this), false);
             }
 
             /* Set the state of the voting buttons */
