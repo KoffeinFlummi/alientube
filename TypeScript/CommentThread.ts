@@ -119,8 +119,8 @@ module AlienTube {
 
             /* Set the button text and the event handler for the "refresh" button */
             let refreshCommentThread = this.threadContainer.querySelector(".refresh");
-            refreshCommentThread.addEventListener("click", function () {
-                this.commentSection.threadCollection.forEach(function (item) {
+            refreshCommentThread.addEventListener("click", () => {
+                this.commentSection.threadCollection.forEach((item) => {
                     if (item.id === this.threadInformation.id) {
                         this.commentSection.downloadThread(item);
                     }
@@ -144,10 +144,10 @@ module AlienTube {
                 sortController.children[sortIndex].textContent = Application.localisationManager.get("post_sort_" + this.sortingTypes[sortIndex]);
             }
             sortController.selectedIndex = this.sortingTypes.indexOf(Preferences.getString("threadSortType"));
-            sortController.addEventListener("change", function () {
+            sortController.addEventListener("change", () => {
                 Preferences.set("threadSortType", sortController.children[sortController.selectedIndex].getAttribute("value"));
 
-                (<any>this).commentSection.threadCollection.forEach(function (item) {
+                (<any>this).commentSection.threadCollection.forEach((item) => {
                     if (item.id === this.threadInformation.id) {
                         this.commentSection.downloadThread(item);
                     }
