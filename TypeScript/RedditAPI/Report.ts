@@ -18,7 +18,7 @@ module AlienTube.Reddit {
         constructor(thing: string, commentThread: CommentThread, isThread: boolean) {
             let reportTemplate = Application.getExtensionTemplateItem(commentThread.commentSection.template, "report");
             this.reportContainer = reportTemplate.querySelector(".at_report");
-            
+
             /* Set localisation text for the various report reasons */
             var report_options = [
                 "spam",

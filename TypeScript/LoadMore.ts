@@ -34,7 +34,7 @@ module AlienTube {
             loadMoreText.textContent = Application.localisationManager.get("post_button_load_more");
             loadMoreText.addEventListener("click", this.onLoadMoreClick.bind(this), false);
         }
-    	
+
         /**
          * Handle a click on the "load more" button.
          * @param eventObject The event object of the load more button click.

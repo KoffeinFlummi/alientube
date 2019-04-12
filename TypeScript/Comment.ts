@@ -74,7 +74,7 @@ module AlienTube {
             let timestamp = <HTMLSpanElement> this.representedHTMLElement.querySelector(".at_timestamp");
             timestamp.textContent = Application.getHumanReadableTimestamp(this.commentObject.created_utc);
             timestamp.setAttribute("timestamp", new Date(this.commentObject.created_utc).toISOString());
-            
+
             /* If the post has been edited, display the edit time next to the timestamp. */
             if (this.commentObject.edited) {
                 timestamp.classList.add("edited");
@@ -182,7 +182,7 @@ module AlienTube {
                 }.bind(this));
             }
         }
-    	
+
         /**
          * Either save a comment or unsave an already saved comment.
          * @param eventObject The event object for the click of the save button.
@@ -201,7 +201,7 @@ module AlienTube {
                 }
             });
         }
-        
+
         /**
          * Show the report comment form.
          * @param eventObject The event object for the click of the report button.
@@ -210,7 +210,7 @@ module AlienTube {
         private onReportButtonClicked(eventObject: Event) {
             new AlienTube.Reddit.Report(this.commentObject.name, this.commentThread, false);
         }
-        
+
         /**
          * Upvote a comment or remove an existing upvote.
          * @param eventObject The event object for the click of the upvote button.
@@ -248,7 +248,7 @@ module AlienTube {
                 new AlienTube.Reddit.VoteRequest(this.commentObject.name, AlienTube.Reddit.Vote.UPVOTE);
             }
         }
-    	
+
         /**
          * Downvote a comment or remove an existing downvote
          * @param eventObject The event object for the click of the downvote button.
@@ -288,7 +288,7 @@ module AlienTube {
         }
 
         /**
-         * Show or hide the comment/reply box. 
+         * Show or hide the comment/reply box.
          * @private
          */
         private onCommentButtonClick() {
@@ -298,7 +298,7 @@ module AlienTube {
             }
             new CommentField(this);
         }
-    	
+
         /**
          * Show the source of the comment.
          * @private
@@ -310,7 +310,7 @@ module AlienTube {
             }
             new CommentField(this, this.commentObject.body);
         }
-    	
+
         /**
          * Edit a comment.
          * @private
@@ -322,7 +322,7 @@ module AlienTube {
             }
             new CommentField(this, this.commentObject.body, true);
         }
-    	
+
         /**
          * Delete a comment.
          * @private

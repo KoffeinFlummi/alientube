@@ -78,7 +78,7 @@ module AlienTube {
         get HTMLElement() {
             return this.representedHTMLElement;
         }
-    	
+
         /**
          * Handle the click of the submit button of the comment field.
          * @param eventObject The event object of the click of the submit button.
@@ -129,7 +129,7 @@ module AlienTube {
                 });
             }
         }
-    	
+
         /**
          * Cancel / Remove the comment field.
          * @private
@@ -137,7 +137,7 @@ module AlienTube {
         private onCancelButtonClick() {
             this.representedHTMLElement.parentNode.removeChild(this.representedHTMLElement);
         }
-    	
+
         /**
          * Handle the contents of the comment field changing.
          * @param eventObject The event object of the input field change.
