@@ -31,3 +31,5 @@ res/style.css
 .sass-cache/*
 
 reloadExtension.scpt
+
+*.zip
