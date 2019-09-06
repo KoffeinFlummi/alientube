@@ -562,7 +562,7 @@ module AlienTube {
          */
         private allowOnChannelChange(eventObject: Event) {
             let allowedOnChannel = (<HTMLInputElement>eventObject.target).checked;
-            let channelId = document.querySelector(".ytd-video-owner-renderer > a").getAttribute("href").split("/").pop();
+            let channelId = document.querySelector("ytd-video-owner-renderer > a").getAttribute("href").split("/").pop();
             let channelDisplayActions = Preferences.getObject("channelDisplayActions");
             channelDisplayActions[channelId] = allowedOnChannel ? "alientube" : "gplus";
             Preferences.set("channelDisplayActions", channelDisplayActions);
@@ -575,7 +575,7 @@ module AlienTube {
         private getDisplayActionForCurrentChannel() {
             let channelId;
             if (Application.currentMediaService() === Service.YouTube) {
-                channelId = document.querySelector(".ytd-video-owner-renderer > a").getAttribute("href").split("/").pop();
+                channelId = document.querySelector("ytd-video-owner-renderer > a").getAttribute("href").split("/").pop();
             } else if (Application.currentMediaService() === Service.Vimeo) {
                 channelId = document.querySelector("a[rel='author']").getAttribute("href").substring(1);
             }
